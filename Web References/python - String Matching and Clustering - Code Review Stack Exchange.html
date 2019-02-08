@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering -->
+<html itemscope="" itemtype="http://schema.org/QAPage"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>python - String Matching and Clustering - Code Review Stack Exchange</title>
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/codereview/img/favicon.ico?v=00b9e479193f">
+    <link rel="apple-touch-icon image_src" href="https://cdn.sstatic.net/Sites/codereview/img/apple-touch-icon.png?v=0a72875519a4">
+    <link rel="search" type="application/opensearchdescription+xml" title="Code Review Stack Exchange" href="https://codereview.stackexchange.com/opensearch.xml">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@StackCodeReview">
+    <meta name="twitter:domain" content="codereview.stackexchange.com">
+
+    <meta property="og:image" itemprop="image primaryImageOfPage" content="https://cdn.sstatic.net/Sites/codereview/img/apple-touch-icon@2.png?v=a4f1c838ba2c">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="String Matching and Clustering">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="I have a pretty simple problem. A large set of unique strings that are to various degrees not clean, and in reality they in fact represent the same underlying reality. They are not person names, bu...">
+    <meta property="og:url" content="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering">
+    <link rel="canonical" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering">
+
+    
+    
+    <script type="text/javascript" async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/ados"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/quant.js"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/beacon.js"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/analytics.js"></script><script type="text/javascript" async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/ados.js"></script><script src="./python - String Matching and Clustering - Code Review Stack Exchange_files/jquery.min.js"></script>
+    <script src="./python - String Matching and Clustering - Code Review Stack Exchange_files/stub.en.js"></script>
+    <link rel="stylesheet" type="text/css" href="./python - String Matching and Clustering - Code Review Stack Exchange_files/all.css">
+
+            <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;String Matching and Clustering&#39;" href="https://codereview.stackexchange.com/feeds/question/37026">
+            <meta name="twitter:app:country" content="US">
+            <meta name="twitter:app:name:iphone" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:iphone" content="871299723">
+            <meta name="twitter:app:url:iphone" content="se-zaphod://codereview.stackexchange.com/questions/37026/string-matching-and-clustering">
+            <meta name="twitter:app:name:ipad" content="Stack Exchange iOS">
+            <meta name="twitter:app:id:ipad" content="871299723">
+            <meta name="twitter:app:url:ipad" content="se-zaphod://codereview.stackexchange.com/questions/37026/string-matching-and-clustering">
+            <meta name="twitter:app:name:googleplay" content="Stack Exchange Android">
+            <meta name="twitter:app:url:googleplay" content="http://codereview.stackexchange.com/questions/37026/string-matching-and-clustering">
+            <meta name="twitter:app:id:googleplay" content="com.stackexchange.marvin">
+        <script>
+        
+            StackExchange.ready(function () {
+                                    
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.initSnippetRenderer();
+                    });
+                    
+
+                StackExchange.using("postValidation", function () {
+                    StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+                });
+
+                
+                StackExchange.question.init({showAnswerHelp:true,totalCommentCount:7,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:37026});
+
+                styleCode();
+
+                    StackExchange.realtime.subscribeToQuestion('196', '37026');
+                                                                    StackExchange.using("gps", function () { StackExchange.gps.trackOutboundClicks('#content', '.post-text', false); });
+
+            });
+        </script>
+
+            <script type="text/x-mathjax-config;executed=true">
+                MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+                    tex2jax: { inlineMath: [ ["\\$", "\\$"] ], displayMath: [ ["$$","$$"], ["\\[", "\\]"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno" },
+                    TeX: { 
+                        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+                    messageStyle: "none"
+            });
+            </script>        
+            <script src="./python - String Matching and Clustering - Code Review Stack Exchange_files/MathJax.js"></script>  
+
+    <script>
+        StackExchange.ready(function () {
+                        StackExchange.realtime.init('wss://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToReputationNotifications('196');
+                StackExchange.realtime.subscribeToTopBarNotifications('196');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","networkMetaHostname":"meta.stackexchange.com","serverTime":1502010129,"routeName":"Questions/Show","site":{"name":"Code Review Stack Exchange","description":"Q&A for peer programmer code reviews","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","recaptchaAudioLang":"en","enableNewTagCreationWarning":false,"insertSpaceAfterNameTabCompletion":false,"id":196,"enableInsertDocLinkDialog":false,"childUrl":"https://codereview.meta.stackexchange.com","enableSocialMediaInSharePopup":true,"protocol":"https"},"user":{"fkey":"9b5706e5964e98b21e6731004ec619b6","rep":0,"isAnonymous":true,"isAnonymousNetworkWide":true},"realtime":{"newest":true,"active":true,"tagged":true,"staleDisconnectIntervalInHours":0,"workerIframeDomain":"https://cdn.sstatic.net"},"events":{"postType":{"question":1},"postEditionSection":{"title":1,"body":2,"tags":3}},"story":{"minCompleteBodyLength":75,"likedTagsMaxLength":300,"dislikedTagsMaxLength":300}}, {"site":{"allowImageUploads":true,"enableUserHovercards":true,"styleCode":true,"enableImgurHttps":true,"forceHttpsImages":true},"comments":{},"userProfile":{},"tags":{},"accounts":{"currentPasswordRequiredForChangingStackIdPassword":true},"flags":{"allowRetractingFlags":true},"snippets":{"snippetsEnabled":true,"renderDomain":"stacksnippets.net"},"markdown":{"asteriskIntraWordEmphasis":true},"monitoring":{"clientTimingsAbsoluteTimeout":30000,"clientTimingsDebounceTimeout":1000}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"a6e2394c9fc7","js/moderator.en.js":"fa5aac63c4be","js/full-anon.en.js":"3c336f60da8e","js/full.en.js":"7c29dbc99b70","js/wmd.en.js":"0a8af01eb481","js/third-party/jquery.autocomplete.min.js":"d3b8fa7fdf74","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"e72442bfeec7","js/help.en.js":"a56fdf9b9ff2","js/tageditor.en.js":"894b82c51bb6","js/tageditornew.en.js":"95d9f3d0dc05","js/inline-tag-editing.en.js":"3e63a01fd39b","js/revisions.en.js":"8f22ba768cac","js/review.en.js":"8ef76835d23c","js/tagsuggestions.en.js":"b278f9a0b23b","js/post-validation.en.js":"58e99a5eb637","js/explore-qlist.en.js":"e71f14781288","js/events.en.js":"0bd6bf0bed8f","js/keyboard-shortcuts.en.js":"d2e9335fb689","js/external-editor.en.js":"3e5baf662544","js/adops.en.js":"9a6a7812a212","js/mathjax-editing.en.js":"c776bb8c2bac","js/external-editor.en.js":"3e5baf662544","js/snippet-javascript.en.js":"ca40b13b0854","js/snippet-javascript-codemirror.en.js":"2f67e13c56e8"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+    <noscript id="noscript-css">&lt;style type="text/css"&gt;body,.so-header{margin-top:1.9em}&lt;/style&gt;</noscript>
+<script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/full-anon.en.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Main; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Main-bold; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Main-italic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Math-italic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Caligraphic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size1; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size2; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size3; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size4; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script type="text/javascript" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/adFeedback.js"></script><link rel="stylesheet" href="./python - String Matching and Clustering - Code Review Stack Exchange_files/adFeedback.css"><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/snippet-javascript.en.js"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/post-validation.en.js"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/prettify-full.en.js"></script><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/external-editor.en.js"></script></head>
+<body class="question-page new-topbar"><div id="MathJax_Message" style="display: none;"></div><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div>
+            <script>(function () { var old = $.fn.contents; $.fn.contents = function () { try { return old.apply(this, arguments); } catch (e) { return $([]); } } })()</script>
+        
+
+    <div id="notify-container"></div>
+    <div id="custom-header"></div>
+
+
+
+
+
+<div class="topbar">
+    <div class="topbar-wrapper">
+
+        <div class="js-topbar-dialog-corral">
+
+
+    <div class="topbar-dialog siteSwitcher-dialog dno">
+        <div class="header">
+            <h3><a href="https://codereview.stackexchange.com/">current community</a>
+            </h3>
+        </div>
+        <div class="modal-content current-site-container">
+            <ul class="current-site">
+                    <li>
+                            <div class="related-links">
+                    <a href="https://chat.stackexchange.com/?tab=site&amp;host=codereview.stackexchange.com" class="js-gps-track" data-gps-track="site_switcher.click({ item_type:6 })">chat</a>
+            </div>
+
+    <a href="https://codereview.stackexchange.com/" class="current-site-link site-link js-gps-track" data-id="196" data-gps-track="site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-codereview" title="Code Review"></div>
+        Code Review
+    </a>
+
+                    </li>
+                    <li class="related-site">
+                            <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                        
+    <a href="https://codereview.meta.stackexchange.com/" class="site-link js-gps-track" data-id="198" data-gps-track="site.switch({ target_site:198, item_type:3 }),site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-codereviewmeta" title="Code Review Meta"></div>
+        Code Review Meta
+    </a>
+
+                    </li>
+            </ul>
+        </div>
+
+        <div class="header" id="your-communities-header">
+            <h3>
+your communities            </h3>
+
+        </div>
+        <div class="modal-content" id="your-communities-section">
+
+                <div class="call-to-login">
+<a href="https://codereview.stackexchange.com/users/signup?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:10 })">Sign up</a> or <a href="https://codereview.stackexchange.com/users/login?ssrc=site_switcher&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering" class="login-link js-gps-track" data-gps-track="site_switcher.click({ item_type:11 })">log in</a> to customize your list.
+                </div>
+        </div>
+
+        <div class="header">
+            <h3><a href="https://stackexchange.com/sites">more stack exchange communities</a>
+            </h3>
+            <a href="https://stackoverflow.blog/" class="fr">company blog</a>
+        </div>
+        <div class="modal-content">
+                <div class="child-content"></div>
+        </div>        
+    </div>
+        </div>
+
+        <div class="network-items">
+                <a href="https://stackexchange.com/" class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track" data-gps-track="site_switcher.show" title="A list of all 170 Stack Exchange sites">
+                    <span class="hidden-text">Stack Exchange</span>
+                </a>
+
+    <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="topbar-icon icon-inbox yes-hover js-inbox-button" title="Recent inbox messages">
+        <span class="hidden-text">Inbox</span>
+        <span class="unread-count" style="display:none"></span>
+    </a>
+    <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="topbar-icon icon-achievements yes-hover js-achievements-button " data-unread-class="" title="Recent achievements: reputation, badges, and privileges earned">
+        <span class="hidden-text">Reputation and Badges</span>
+        <span class="unread-count" style="display:none">
+            
+        </span>
+    </a>
+        </div>
+
+        <div class="topbar-links">
+
+                <div class="links-container">
+                <span class="topbar-menu-links">
+                                    <a href="https://codereview.stackexchange.com/users/signup?ssrc=head&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering" class="login-link" rel="nofollow">sign up</a>
+                                <a href="https://codereview.stackexchange.com/users/login?ssrc=head&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering" class="login-link" rel="nofollow">log in</a>
+
+                            <a href="https://codereview.stackexchange.com/tour">tour</a>
+        <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="icon-help js-help-button" title="Help Center and other resources">
+            help
+            <span class="triangle"></span>
+        </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                                    <li>
+                        <a href="https://codereview.stackexchange.com/tour" class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })">
+                            Tour
+                            <span class="item-summary">
+                                Start here for a quick overview of the site
+                            </span>
+                        </a>
+                    </li>
+                <li>
+                    <a href="https://codereview.stackexchange.com/help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })">
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                        <li>
+                            <a href="https://codereview.meta.stackexchange.com/" class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })">
+                                Meta
+                                <span class="item-summary">
+                                    Discuss the workings and policies of this site
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://stackoverflow.com/company/about" class="js-gps-track" data-gps-track="help_popup.click({ item_type:6 })">
+                                About Us
+                                <span class="item-summary">
+                                    Learn more about Stack Overflow the company
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.stackoverflowbusiness.com/?ref=topbar_help" class="js-gps-track" data-gps-track="help_popup.click({ item_type:7 })">
+                                Business
+                                <span class="item-summary">
+                                    Learn more about hiring developers or posting ads with us
+                                </span>
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+                                            </span>
+                </div>
+
+            <div class="search-container">
+                <form id="search" action="https://codereview.stackexchange.com/search" method="get" autocomplete="off" role="search">
+                        <input name="q" type="text" placeholder="Search Q&amp;A" value="" tabindex="1" autocomplete="off" maxlength="240">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+    <script>
+        StackExchange.ready(function() { StackExchange.topbar.init(); });
+    </script>
+
+    <div class="container  ">
+            <div id="header">
+                <br class="cbt">
+                <div id="hlogo">
+                    <a href="https://codereview.stackexchange.com/" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:8})">
+                        Code Review
+                    </a>
+                </div>
+                <div id="hmenus">
+                        <div class="nav mainnavs" role="navigation" aria-label="site navigation">
+                            <ul>
+                                    <li class="youarehere">
+        <a id="nav-questions" href="https://codereview.stackexchange.com/questions" class="js-gps-track" data-gps-track="top_nav.click({is_current:true, location:2, destination:1})">
+        Questions
+        </a>
+    </li>
+
+                                                                    <li>
+        <a id="nav-tags" href="https://codereview.stackexchange.com/tags" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:2})">
+        Tags
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-users" href="https://codereview.stackexchange.com/users" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:3})">
+        Users
+        </a>
+    </li>
+
+                                    <li>
+        <a id="nav-badges" href="https://codereview.stackexchange.com/help/badges" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:4})">
+        Badges
+        </a>
+    </li>
+
+    <li>
+        <a id="nav-unanswered" href="https://codereview.stackexchange.com/unanswered" class="js-gps-track" data-gps-track="top_nav.click({is_current:false, location:2, destination:5})">
+        Unanswered
+        </a>
+    </li>
+                            </ul>
+                        </div>
+                    <div class="nav askquestion" role="navigation" aria-label="ask new question">
+                        <ul>
+                            <li>
+                                <a id="nav-askquestion" href="https://codereview.stackexchange.com/questions/ask">Ask Question</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <div id="content" class="snippet-hidden">
+
+
+
+            
+
+<div itemscope="" itemtype="http://schema.org/Question">
+    <link itemprop="image" href="https://cdn.sstatic.net/Sites/codereview/img/apple-touch-icon.png?v=0a72875519a4">
+
+
+<div id="herobox" class="hero-container">
+    <div id="hero-content">
+            <div id="close"><a title="click to minimize">_</a></div>
+        <div id="blurb">
+            Code Review Stack Exchange is a question and answer site for peer programmer code reviews. Join them; it only takes a minute:
+            <br>
+            <br>
+            <a href="https://codereview.stackexchange.com/users/signup?ssrc=hero&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering" id="tell-me-more" class="button">Sign up</a>
+        </div>
+        <div id="desc">
+            <b>Here's how it works:</b>
+            <ol id="hiw">
+                <li id="q">
+                    Anybody can ask a question
+                </li>
+                <li id="an">
+                    Anybody can answer
+                </li>
+                <li id="b">
+                    The best answers are voted up and rise to the top
+                </li>
+            </ol>
+        </div>
+    <div style="clear: both"></div>
+    </div>
+</div><script>
+    StackExchange.ready(function () {
+
+        var location = 0;
+        if ($("body").hasClass("questions-page")) {
+            location = 1;
+        } else if ($("body").hasClass("question-page")) {
+            location = 1;
+        } else if ($("body").hasClass("faq-page")) {
+            location = 5;
+        } else if ($("body").hasClass("home-page")) {
+            location = 3;
+        }
+        
+        $('#tell-me-more').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: 'cta', location: location }, true);
+            });
+        });
+        
+        $('.hero-container #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "minimize", location: location }, true);
+            });
+            
+            $.cookie("hero", "mini", { path: "/", expires: 365 });
+            $.ajax({
+                url: "/hero-mini",
+                success: function (data) {
+                    $(".hero-container").fadeOut("fast", function () {
+                        $(".hero-container").replaceWith(data);
+                        $("#herobox-mini").fadeIn("fast");
+                    });
+                }
+            });
+            return false;
+        });
+    });
+
+</script>    <div class="inner-content">
+        <div id="question-header">
+                <h1 itemprop="name"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering" class="question-hyperlink">String Matching and Clustering</a></h1>
+
+            
+        </div>
+            <div id="mainbar" role="main" aria-label="question and answers">
+
+            
+
+<div class="question" data-questionid="37026" id="question">
+
+    <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22, 0, "adzerk1289216171", 4).enableDynamicSiteSelection().setZone(29); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1289216171"><div style="background-image: url( data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw== ); width: 1px; height: 1px; display:none;"></div><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/i.gif"></div>    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="37026">
+        <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">9</span>
+        <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+        <a class="star-off" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#">favorite</a>
+        <div class="favoritecount"><b>8</b></div>
+
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="text">
+
+<p>I have a pretty simple problem. A large set of unique strings that are to various degrees not clean, and in reality they in fact represent the same underlying reality. They are not person names, but they could be. So for example Dr. John Holmes and Dr. Jon Holms are more than likely the same person. From the list of unqiue strings I want to cluster together those that possibly match the same underlying reality. There is no restrictions on the size of the cluster (i.e. I am not expecting only one match per string). </p>
+
+<p>I calculate the distance between strings using the Jaro-Distance with jellyfish in python. But then I wondered how I cluster them together? I was unable to figure out how to do this using scipy clusters as I am working with strings, not floats, so I decided to work according to the following algorithm. </p>
+
+<ol>
+<li>Make the first object the centroid for the first cluster</li>
+<li>For the next object, calculate the similarity with each existing cluster centroid
+If the highest calculated similarity is over some threshold value then add the object to the relevant cluster and re-determine the centroid of that cluster, otherwise use the object to initiate a new cluster. </li>
+<li>If any object remains to be clustered then return to step </li>
+</ol>
+
+<p>Also, I decided to strip out generic components of the strings to improve the matches. In the name example above, this would give Dr. John Holmes, and J. Holmes a better chance of matching if 'Dr' is stripped out as a generic component.</p>
+
+<p>I created a Stripped Class that has an attribute that is the original unique string, and then attribute that is a stripped version (stripped of the generic components). This is becasue once stripped many of the strings could have exactly the same values, and I need to be able to identify which original string they identify. </p>
+
+<p>The code is posted below. It works well, except that the size/number of clusters is not independent of the order in which the strings are evaluated. So the results do differ. </p>
+
+<p>In the final function, the SLink fucntion is called inside another function</p>
+
+<p>I would specifically like to know if anyone knows of a better way to implement this type of clustering? If anyone has comments on how I could improve my code, and if anyone has any information about clustering strings in scipy.</p>
+
+<p>In an IPython notebook I go through in more detail how I could refine this system, including using another function to verify the clusters using alternate data points relating to each string (such as age). If anyone would like to view that and offer guidance, then please see the following link:</p>
+
+<p><a href="http://nbviewer.ipython.org/gist/MajorGressingham/7876252">http://nbviewer.ipython.org/gist/MajorGressingham/7876252</a></p>
+
+<p>I think as the functions were somewhat trial and error and unplanned, they may have got a bit out of control. Any guidance appreciated. I am a researcher living in Bangladesh, a total programming data tripper sadly, but trying to get better every day. </p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="kwd">class</span><span class="pln"> </span><span class="typ">Stripped</span><span class="pun">:</span><span class="pln">
+    </span><span class="str">'Common base class for all stripped stings'</span><span class="pln">
+
+    </span><span class="kwd">def</span><span class="pln"> __init__</span><span class="pun">(</span><span class="pln">self</span><span class="pun">,</span><span class="pln"> original</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">None</span><span class="pun">,</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pun">):</span><span class="pln">
+        </span><span class="com"># Class attribute that is the string in its original format</span><span class="pln">
+
+        self</span><span class="pun">.</span><span class="pln">original </span><span class="pun">=</span><span class="pln"> original
+        </span><span class="typ">StrVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> original</span><span class="pun">.</span><span class="pln">lower</span><span class="pun">()</span><span class="pln">
+        </span><span class="typ">StrVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> re</span><span class="pun">.</span><span class="pln">sub</span><span class="pun">(</span><span class="str">'[^A-Za-z0-9 '</span><span class="pln"> </span><span class="str">']+'</span><span class="pun">,</span><span class="pln"> </span><span class="str">' '</span><span class="pun">,</span><span class="pln"> </span><span class="typ">StrVal</span><span class="pun">)</span><span class="pln">
+
+        </span><span class="com">#strip out all occurences of sub-strings from GenericAll list that appear anywhere in the string</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> word </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">:</span><span class="pln">
+            </span><span class="typ">RegEx1</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> re</span><span class="pun">.</span><span class="pln">compile</span><span class="pun">(</span><span class="str">''</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> word</span><span class="pun">)</span><span class="pln">
+            </span><span class="typ">StrVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> re</span><span class="pun">.</span><span class="pln">sub</span><span class="pun">(</span><span class="typ">RegEx1</span><span class="pun">,</span><span class="pln"> </span><span class="str">''</span><span class="pun">,</span><span class="pln"> </span><span class="typ">StrVal</span><span class="pun">)</span><span class="pln">
+
+        </span><span class="com"># If provided as argument strip out all occurences of sub-string when that sub string is surrounded by </span><span class="pln">
+        </span><span class="com"># whitespace (i.e. is not part of another substring-sequence)</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="kwd">not</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">None</span><span class="pun">:</span><span class="pln">
+            </span><span class="kwd">for</span><span class="pln"> word </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pun">:</span><span class="pln">
+                </span><span class="typ">RegEx2</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> re</span><span class="pun">.</span><span class="pln">compile</span><span class="pun">(</span><span class="pln">r</span><span class="str">'\b'</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> word </span><span class="pun">+</span><span class="pln"> r</span><span class="str">'\b'</span><span class="pun">)</span><span class="pln">
+                </span><span class="typ">StrVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> re</span><span class="pun">.</span><span class="pln">sub</span><span class="pun">(</span><span class="typ">RegEx2</span><span class="pun">,</span><span class="pln"> </span><span class="str">''</span><span class="pun">,</span><span class="pln"> </span><span class="typ">StrVal</span><span class="pun">)</span><span class="pln">
+
+        </span><span class="com"># Removes special characters, removes all whitespace</span><span class="pln">
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">True</span><span class="pun">:</span><span class="pln">
+            </span><span class="typ">StrVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StrVal</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="str">' '</span><span class="pun">,</span><span class="pln"> </span><span class="str">''</span><span class="pun">)</span><span class="pln">
+
+        </span><span class="com"># Class attribute that is the stipped string</span><span class="pln">
+        self</span><span class="pun">.</span><span class="pln">stripped </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StrVal</span></code></pre>
+
+<p>GenericAll is a list of substrings to be stripped from each string wherever the sub string appears in the string. GenericWhite is a list of substrings that are stripped only if they are surrounded by whitespace. </p>
+
+<p>And the function that implements the clustering</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="kwd">def</span><span class="pln"> </span><span class="typ">SlinkSC</span><span class="pun">(</span><span class="typ">ClassList</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Threshold</span><span class="pun">):</span><span class="pln">
+</span><span class="com">#1</span><span class="pln">
+    random</span><span class="pun">.</span><span class="pln">shuffle</span><span class="pun">(</span><span class="typ">ClassList</span><span class="pun">)</span><span class="pln">
+
+
+    </span><span class="typ">Clusters</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+    </span><span class="typ">ClustersStripped</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+    </span><span class="typ">Centroid</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+    </span><span class="typ">Scores</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+
+    </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">StrippedClass</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">ClassList</span><span class="pun">:</span><span class="pln">     
+        </span><span class="typ">SPScores</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+        </span><span class="typ">Matched</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
+
+        </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">Clusters</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+            </span><span class="typ">Clusters</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">ClustersStripped</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">Centroid</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">,</span><span class="pln"> </span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">Scores</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([])</span><span class="pln">
+            </span><span class="kwd">continue</span><span class="pln">
+
+        </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">ClustNum</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">Clusters</span><span class="pun">)):</span><span class="pln">
+            </span><span class="typ">Dist</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> jf</span><span class="pun">.</span><span class="pln">jaro_distance</span><span class="pun">(</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Centroid</span><span class="pun">[</span><span class="typ">ClustNum</span><span class="pun">][</span><span class="lit">0</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">SPScores</span><span class="pun">.</span><span class="pln">append</span><span class="pun">(</span><span class="typ">Dist</span><span class="pun">)</span><span class="pln">
+
+        </span><span class="typ">MaxVal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> max</span><span class="pun">(</span><span class="typ">SPScores</span><span class="pun">)</span><span class="pln">
+        </span><span class="typ">MaxInd</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SPScores</span><span class="pun">.</span><span class="pln">index</span><span class="pun">(</span><span class="pln">max</span><span class="pun">(</span><span class="typ">SPScores</span><span class="pun">))</span><span class="pln">
+
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">MaxVal</span><span class="pln"> </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="typ">Threshold</span><span class="pun">:</span><span class="pln">
+            </span><span class="typ">Clusters</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">].</span><span class="pln">append</span><span class="pun">(</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original</span><span class="pun">)</span><span class="pln">
+            </span><span class="typ">ClustersStripped</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">].</span><span class="pln">append</span><span class="pun">(</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">)</span><span class="pln">
+
+            </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">Scores</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">])</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+                </span><span class="typ">Scores</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">].</span><span class="pln">append</span><span class="pun">(</span><span class="typ">MaxVal</span><span class="pun">)</span><span class="pln">               
+            </span><span class="kwd">else</span><span class="pun">:</span><span class="pln">
+                </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">MaxVal</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="typ">Scores</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">][</span><span class="lit">0</span><span class="pun">]:</span><span class="pln">
+                    </span><span class="typ">Scores</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">][</span><span class="lit">0</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">MaxVal</span><span class="pln">
+                    </span><span class="typ">Centroid</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">][</span><span class="lit">0</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped
+                    </span><span class="typ">Centroid</span><span class="pun">[</span><span class="typ">MaxInd</span><span class="pun">][</span><span class="lit">1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original
+            </span><span class="typ">Matched</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln">
+
+        </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">Matched</span><span class="pln"> </span><span class="pun">==</span><span class="lit">0</span><span class="pun">:</span><span class="pln">       
+            </span><span class="typ">Clusters</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">ClustersStripped</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">Centroid</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([</span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">stripped</span><span class="pun">,</span><span class="pln"> </span><span class="typ">StrippedClass</span><span class="pun">.</span><span class="pln">original</span><span class="pun">])</span><span class="pln">
+            </span><span class="typ">Scores</span><span class="pun">.</span><span class="pln">append</span><span class="pun">([])</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">[</span><span class="typ">Clusters</span><span class="pun">,</span><span class="pln"> </span><span class="typ">ClustersStripped</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Centroid</span><span class="pun">]</span></code></pre>
+
+<p>ClassList is a list of Stripped Class obejcts created from the unique strings that are to be clustered. Threshold is the threshold above which strings will be clustered when distance between the centorid and the string being evaluated is calcuated as the jaro-distance. </p>
+
+<p>Lastly I wrote a function that sort of combines all of the above, but also clusters the clusters, and calls the clustering function recursively until no more clusters are found. It also references the data frame from which the strings are pulled. In theory, if two non-indentical strings represent the same undelying reality, this third data point should be equal for the non-identical stings that are above the Jaro-Distance threshold. This function directly modifies the data frame from which both the list of unqiue strings and the verifying data point are drawn, until no more modifications are possible. </p>
+
+<p>That looks like this:</p>
+
+<pre class="lang-py prettyprint prettyprinted"><code><span class="pln"> </span><span class="kwd">def</span><span class="pln"> </span><span class="typ">ClustersRecursive2</span><span class="pun">(</span><span class="typ">Threshold</span><span class="pun">,</span><span class="pln"> df</span><span class="pun">,</span><span class="pln"> col1</span><span class="pun">,</span><span class="pln"> col2</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">None</span><span class="pun">,</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pun">):</span><span class="pln">
+    </span><span class="typ">Styles</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> df</span><span class="pun">[</span><span class="pln">col1</span><span class="pun">].</span><span class="pln">unique</span><span class="pun">()</span><span class="pln">
+    </span><span class="typ">ClassList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">Stripped</span><span class="pun">(</span><span class="pln">style</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pun">,</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> style </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">Styles</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">ClustersDict</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{}</span><span class="pln">
+    </span><span class="typ">Clusters</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SlinkSC</span><span class="pun">(</span><span class="typ">ClassList</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Threshold</span><span class="pun">)</span><span class="pln">
+    </span><span class="typ">ClustersOriginal</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Clusters</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">ClustersCentroid</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Clusters</span><span class="pun">[</span><span class="lit">2</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">IndList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln">x </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">ClustersOriginal</span><span class="pun">))</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">ClustersOriginal</span><span class="pun">[</span><span class="pln">x</span><span class="pun">])</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">]</span><span class="pln">   
+    </span><span class="typ">MultiClusters</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">ClustersOriginal</span><span class="pun">[</span><span class="typ">Ind</span><span class="pun">]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">Ind</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">IndList</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">MultiCentroid</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">ClustersCentroid</span><span class="pun">[</span><span class="typ">Ind</span><span class="pun">]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">Ind</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">IndList</span><span class="pun">]</span><span class="pln">
+
+   </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">MultiClusters</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> 
+    </span><span class="kwd">else</span><span class="pun">:</span><span class="pln">
+        </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> cluster </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">MultiClusters</span><span class="pun">)):</span><span class="pln">
+            </span><span class="typ">MultiSMV</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> list</span><span class="pun">(</span><span class="pln">itertools</span><span class="pun">.</span><span class="pln">chain</span><span class="pun">(*[</span><span class="pln">df</span><span class="pun">[</span><span class="pln">df</span><span class="pun">[</span><span class="pln">col1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> elem</span><span class="pun">][</span><span class="pln">col2</span><span class="pun">].</span><span class="pln">unique</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> elem </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">MultiClusters</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">]]))</span><span class="pln">
+            </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">set</span><span class="pun">(</span><span class="typ">MultiSMV</span><span class="pun">))</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">:</span><span class="pln">
+                </span><span class="typ">ClustersDict</span><span class="pun">[</span><span class="typ">MultiCentroid</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">][</span><span class="lit">1</span><span class="pun">]]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">MultiClusters</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">]</span><span class="pln">
+                </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">+=</span><span class="lit">1</span><span class="pln">
+            </span><span class="kwd">else</span><span class="pun">:</span><span class="pln">
+                </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">MultiSMV</span><span class="pun">)</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">MultiClusters</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">]):</span><span class="pln">
+                    </span><span class="kwd">for</span><span class="pln"> smv </span><span class="kwd">in</span><span class="pln"> list</span><span class="pun">(</span><span class="pln">set</span><span class="pun">(</span><span class="typ">MultiSMV</span><span class="pun">)):</span><span class="pln">
+                        </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">MultiSMV</span><span class="pun">.</span><span class="pln">count</span><span class="pun">(</span><span class="pln">smv</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">:</span><span class="pln">
+                            </span><span class="typ">BoolList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="kwd">True</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> elem </span><span class="pun">==</span><span class="pln"> smv </span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">False</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> elem </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">MultiSMV</span><span class="pun">]</span><span class="pln">
+                            </span><span class="typ">StrList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">MultiClusters</span><span class="pun">[</span><span class="pln">cluster</span><span class="pun">][</span><span class="pln">x</span><span class="pun">]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">BoolList</span><span class="pun">))</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">BoolList</span><span class="pun">[</span><span class="pln">x</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">True</span><span class="pun">]</span><span class="pln">
+                            </span><span class="typ">StrList</span><span class="pun">.</span><span class="pln">sort</span><span class="pun">(</span><span class="kwd">lambda</span><span class="pln"> x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">:</span><span class="pln"> cmp</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="pln">x</span><span class="pun">),</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">y</span><span class="pun">)))</span><span class="pln">
+                            </span><span class="typ">ClustersDict</span><span class="pun">[</span><span class="typ">StrList</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StrList</span><span class="pln">
+                            </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">+=</span><span class="lit">1</span><span class="pln">
+
+    </span><span class="com">#Cluster the Clusters</span><span class="pln">
+    </span><span class="typ">ClusClusList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">Stripped</span><span class="pun">(</span><span class="pln">style</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pun">,</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> style </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">ClustersDict</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">()]</span><span class="pln">
+    </span><span class="typ">ClusClusters</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">SlinkSC</span><span class="pun">(</span><span class="typ">ClusClusList</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Threshold</span><span class="pun">)</span><span class="pln">
+    </span><span class="typ">ClusClusOrig</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ClusClusters</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">ClusClusCentroid</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">ClusClusters</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">IndList2</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="pln">x </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">ClusClusOrig</span><span class="pun">))</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">ClusClusOrig</span><span class="pun">[</span><span class="pln">x</span><span class="pun">])</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">]</span><span class="pln">
+    </span><span class="typ">MultiClusClus</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="typ">ClusClusOrig</span><span class="pun">[</span><span class="typ">Ind</span><span class="pun">]</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">Ind</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">IndList2</span><span class="pun">]</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">MultiClusClus</span><span class="pun">)</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> </span><span class="typ">CCluster</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="pln">len</span><span class="pun">(</span><span class="typ">MultiClusClus</span><span class="pun">)):</span><span class="pln">
+            </span><span class="typ">MultiSMVCC</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> list</span><span class="pun">(</span><span class="pln">itertools</span><span class="pun">.</span><span class="pln">chain</span><span class="pun">(*[</span><span class="pln">df</span><span class="pun">[</span><span class="pln">df</span><span class="pun">[</span><span class="pln">col1</span><span class="pun">]</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> elem</span><span class="pun">][</span><span class="pln">col2</span><span class="pun">].</span><span class="pln">unique</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">for</span><span class="pln"> elem </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">MultiClusClus</span><span class="pun">[</span><span class="typ">CCluster</span><span class="pun">]]))</span><span class="pln">
+            </span><span class="kwd">if</span><span class="pln"> len</span><span class="pun">(</span><span class="pln">set</span><span class="pun">(</span><span class="typ">MultiSMVCC</span><span class="pun">))</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">:</span><span class="pln">
+                </span><span class="typ">NewList</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[]</span><span class="pln">
+                </span><span class="kwd">for</span><span class="pln"> x </span><span class="kwd">in</span><span class="pln"> xrange</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> len</span><span class="pun">(</span><span class="typ">MultiClusClus</span><span class="pun">[</span><span class="typ">CCluster</span><span class="pun">])):</span><span class="pln">
+                    </span><span class="typ">NewList</span><span class="pun">.</span><span class="pln">extend</span><span class="pun">(</span><span class="typ">ClustersDict</span><span class="pun">[</span><span class="typ">MultiClusClus</span><span class="pun">[</span><span class="typ">CCluster</span><span class="pun">][</span><span class="pln">x</span><span class="pun">]])</span><span class="pln">
+                    </span><span class="kwd">del</span><span class="pln"> </span><span class="typ">ClustersDict</span><span class="pun">[</span><span class="typ">MultiClusClus</span><span class="pun">[</span><span class="typ">CCluster</span><span class="pun">][</span><span class="pln">x</span><span class="pun">]]</span><span class="pln">
+                </span><span class="typ">ClustersDict</span><span class="pun">[</span><span class="typ">MultiClusClus</span><span class="pun">[</span><span class="typ">CCluster</span><span class="pun">][</span><span class="lit">0</span><span class="pun">]].</span><span class="pln">extend</span><span class="pun">(</span><span class="typ">NewList</span><span class="pun">)</span><span class="pln">
+
+
+    </span><span class="typ">StringMap</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{}</span><span class="pln">
+    </span><span class="kwd">for</span><span class="pln"> key</span><span class="pun">,</span><span class="pln"> value </span><span class="kwd">in</span><span class="pln"> </span><span class="typ">ClustersDict</span><span class="pun">.</span><span class="pln">iteritems</span><span class="pun">():</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> elem </span><span class="kwd">in</span><span class="pln"> value</span><span class="pun">:</span><span class="pln">
+            </span><span class="typ">StringMap</span><span class="pun">[</span><span class="pln">elem</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> key
+
+
+    </span><span class="kwd">if</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> 
+    </span><span class="kwd">else</span><span class="pun">:</span><span class="pln">
+        </span><span class="kwd">for</span><span class="pln"> row </span><span class="kwd">in</span><span class="pln"> DF</span><span class="pun">.</span><span class="pln">index</span><span class="pun">:</span><span class="pln">
+            </span><span class="kwd">try</span><span class="pun">:</span><span class="pln">
+                df</span><span class="pun">[</span><span class="pln">col1</span><span class="pun">][</span><span class="pln">row</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">StringMap</span><span class="pun">[</span><span class="pln">df</span><span class="pun">[</span><span class="pln">col1</span><span class="pun">][</span><span class="pln">row</span><span class="pun">]]</span><span class="pln">
+            </span><span class="kwd">except</span><span class="pln"> </span><span class="typ">KeyError</span><span class="pun">:</span><span class="pln">
+                </span><span class="kwd">pass</span><span class="pln">
+
+
+        </span><span class="typ">ClustersRecursive</span><span class="pun">(</span><span class="typ">Threshold</span><span class="pun">,</span><span class="pln"> df</span><span class="pun">,</span><span class="pln"> col1</span><span class="pun">,</span><span class="pln"> col2</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericAll</span><span class="pun">,</span><span class="pln"> </span><span class="typ">GenericWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">None</span><span class="pun">,</span><span class="pln"> </span><span class="typ">DelWhite</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">False</span><span class="pun">)</span><span class="pln"> </span></code></pre>
+    </div>
+    <div class="post-taglist">
+        <a href="https://codereview.stackexchange.com/questions/tagged/python" class="post-tag js-gps-track" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="https://codereview.stackexchange.com/questions/tagged/strings" class="post-tag js-gps-track" title="show questions tagged &#39;strings&#39;" rel="tag">strings</a> <a href="https://codereview.stackexchange.com/questions/tagged/edit-distance" class="post-tag js-gps-track" title="show questions tagged &#39;edit-distance&#39;" rel="tag">edit-distance</a> <a href="https://codereview.stackexchange.com/questions/tagged/clustering" class="post-tag js-gps-track" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://codereview.stackexchange.com/q/37026" title="short permalink to this question" class="short-link" id="link-post-37026">share</a><span class="lsep">|</span><a href="https://codereview.stackexchange.com/posts/37026/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info user-hover">
+    <div class="user-action-time">
+        <a href="https://codereview.stackexchange.com/posts/37026/revisions" title="show all edits to this post">edited <span title="2014-02-25 00:57:24Z" class="relativetime">Feb 25 '14 at 0:57</span></a>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://codereview.stackexchange.com/users/9357/200-success"><div class="gravatar-wrapper-32"><img src="./python - String Matching and Clustering - Code Review Stack Exchange_files/1f9W9.png" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://codereview.stackexchange.com/users/9357/200-success">200_success</a><span class="mod-flair" title="moderator">♦</span>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 112,724" dir="ltr">113k</span><span title="14 gold badges"><span class="badge1"></span><span class="badgecount">14</span></span><span title="129 silver badges"><span class="badge2"></span><span class="badgecount">129</span></span><span title="366 bronze badges"><span class="badge3"></span><span class="badgecount">366</span></span>
+        </div>
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2013-12-10 10:59:07Z" class="relativetime">Dec 10 '13 at 10:59</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://codereview.stackexchange.com/users/33260/woody-pride"><div class="gravatar-wrapper-32"><img src="./python - String Matching and Clustering - Code Review Stack Exchange_files/A5sYr.jpg" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://codereview.stackexchange.com/users/33260/woody-pride">Woody Pride</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score " dir="ltr">166</span><span title="1 gold badge"><span class="badge1"></span><span class="badgecount">1</span></span><span title="1 silver badge"><span class="badge2"></span><span class="badgecount">1</span></span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+                    
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-37026" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="2" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-60962" class="comment ">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received" class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">(i) Do you have any test data? (ii) Can you explain in more detail why you decided not to use any of the methods in <a href="http://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html" rel="nofollow noreferrer"><code>scipy.cluster.hierarchy</code></a>?</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/11728/gareth-rees" title="32,787 reputation" class="comment-user">Gareth Rees</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment60962_37026"><span title="2013-12-10 11:32:31Z" class="relativetime-clean">Dec 10 '13 at 11:32</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-60994" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Actually I would love to use scipy, but didn't understand the mechanics of doing that. The jaro-distance does not obey triangulation rules, so I'm not sure it is possible. The Jaccard metric is available in scipy hierachy methods, but I kept getting a message saying that my strings could not become floats when creating the matrix. Backstory is I posted this on stackoverflow basically asking for help with scipy and I was referred here as I actually have code.</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/33260/woody-pride" title="166 reputation" class="comment-user owner">Woody Pride</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment60994_37026"><span title="2013-12-10 14:59:37Z" class="relativetime-clean">Dec 10 '13 at 14:59</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-61002" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">So it sounds as if you tried to use one of the SciPy clustering methods (which one?) but couldn't figure out how to use it, so you gave up and wrote your own. Is that right?</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/11728/gareth-rees" title="32,787 reputation" class="comment-user">Gareth Rees</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment61002_37026"><span title="2013-12-10 15:35:32Z" class="relativetime-clean">Dec 10 '13 at 15:35</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-61003" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">That pretty much sums it up! Basically I know little about clustering, and found the above simple program format and decided to write my own. I looked into hierarchical clustering but essentially got stuck even creating the matrix. I'm not familiar with the package, and don't fully understand the method. I was looking at hierarchical clustering as k-means seemed tough as I would have no idea how to specify k. Plus I can fully get my head around jaro distance (hamming etc. just does not seem as good) and that metric is not available with scipy. Should I go back and try with scipy you reckon?</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/33260/woody-pride" title="166 reputation" class="comment-user owner">Woody Pride</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment61003_37026"><span title="2013-12-10 15:39:02Z" class="relativetime-clean">Dec 10 '13 at 15:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-61004" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Also, could not work out how to do it with strings. Would I have to convert them to a float somehow? or to unicode?</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/33260/woody-pride" title="166 reputation" class="comment-user owner">Woody Pride</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment61004_37026"><span title="2013-12-10 15:39:57Z" class="relativetime-clean">Dec 10 '13 at 15:39</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-37026" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link  dno" title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments."></a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link " title="expand to show all comments on this post" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" onclick="">show <b>2</b> more comments</a>
+        </div>         
+    </td>
+</tr>        </tbody></table>
+</div>
+
+            <div id="answers">
+
+                <a name="tab-top"></a>
+                <div id="answers-header">
+                    <div class="subheader answers-subheader">
+                        <h2>
+                                1 Answer
+                                <span style="display:none;" itemprop="answerCount">1</span>
+                        </h2>
+                        <div>
+                            <div id="tabs">
+        <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering?answertab=active#tab-top" data-nav-xhref="" title="Answers with the latest activity first" data-value="active" data-shortcut="A">
+            active</a>
+        <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering?answertab=oldest#tab-top" data-nav-xhref="" title="Answers in the order they were provided" data-value="oldest" data-shortcut="O">
+            oldest</a>
+        <a class="youarehere" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering?answertab=votes#tab-top" data-nav-xhref="" title="Answers with the highest score first" data-value="votes" data-shortcut="V">
+            votes</a>
+</div>
+                        </div>
+                    </div>    
+                </div>    
+
+
+
+
+  
+<a name="37059"></a>
+<div id="answer-37059" class="answer" data-answerid="37059" itemscope="" itemtype="http://schema.org/Answer">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+        <input type="hidden" name="_id_" value="37059">
+        <a class="vote-up-off" title="This answer is useful">up vote</a>
+        <span itemprop="upvoteCount" class="vote-count-post ">7</span>
+        <a class="vote-down-off" title="This answer is not useful">down vote</a>
+
+
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text" itemprop="text">
+<p>Here's a quick illustration of how to use <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage"><code>scipy.cluster.hierarchy.linkage</code></a> to hierarchically cluster a group of strings according to their <a href="https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance">Jaro score</a>. I'm not going to try to solve your actual problem, just show how to use the SciPy interface.</p>
+
+<p>If you read the documentation for <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage"><code>scipy.cluster.hierarchy.linkage</code></a> you'll see that it takes as its first argument:</p>
+
+<blockquote>
+  <p>A condensed or redundant distance matrix. A condensed distance matrix is a flat array containing the upper triangular [part] of the distance matrix.</p>
+</blockquote>
+
+<p>What does that mean? The idea is that if you have a matrix giving distances between your words, for example:</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">       │CHEESE CHORES GEESE  GLOVES
+───────┼───────────────────────────
+CHEESE │    0   0.222  0.177  0.444     
+CHORES │0.222       0  0.422  0.333
+GEESE  │0.177   0.422      0  0.300
+GLOVES │0.444   0.333  0.300      0</span></code></pre>
+
+<p>Then the condensed distance matrix is a flattened array containing the numbers in the upper triangle: that is, the part of the matrix above the diagonal of zeroes. In this case, it's the array <code>[0.222, 0.177, 0.444, 0.422, 0.333, 0.3]</code>. Here's how to compute the condensed distance matrix:</p>
+
+<ol>
+<li><p>Define a distance function that takes coordinates (<em>i</em>, <em>j</em>) and returns the distance between word <em>i</em> and word <em>j</em>. Despite the function being named <code>jaro_distance</code>, this score is actually a measure of <em>similarity</em> rather than difference, so we need to subtract it from 1 to get a distance measure.</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">&gt;&gt;&gt; from jellyfish import jaro_distance
+&gt;&gt;&gt; words = 'CHEESE CHORES GEESE GLOVES'.split()
+&gt;&gt;&gt; def d(coord):
+...     i, j = coord
+...     return 1 - jaro_distance(words[i], words[j])</span></code></pre></li>
+<li><p>Use <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.triu_indices.html"><code>numpy.triu_indices</code></a> to get the coordinates of the upper triangle:</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; np.triu_indices(len(words), 1)
+(array([0, 0, 0, 1, 1, 2]), array([1, 2, 3, 2, 3, 3]))</span></code></pre></li>
+<li><p>Use <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.apply_along_axis.html"><code>numpy.apply_along_axis</code></a> to apply the distance function to the coordinates of the upper triangle just computed:</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">&gt;&gt;&gt; np.apply_along_axis(d, 0, _)
+array([ 0.22222222,  0.17777778,  0.44444444,  0.42222222,  0.33333333,
+        0.3       ])</span></code></pre></li>
+</ol>
+
+<p>Pass this array to <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage"><code>scipy.cluster.hierarchy.linkage</code></a>:</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">&gt;&gt;&gt; import scipy.cluster.hierarchy
+&gt;&gt;&gt; scipy.cluster.hierarchy.linkage(_)
+array([[ 0.        ,  2.        ,  0.17777778,  2.        ],
+       [ 1.        ,  4.        ,  0.22222222,  3.        ],
+       [ 3.        ,  5.        ,  0.3       ,  4.        ]])</span></code></pre>
+
+<p>What does this mean? The documentation says:</p>
+
+<blockquote>
+  <p>A 4 by (n-1) matrix Z is returned. At the i-th iteration, clusters with indices Z[i, 0] and Z[i, 1] are combined to form cluster n + i. A cluster with an index less than n corresponds to one of the n original observations. The distance between clusters Z[i, 0] and Z[i, 1] is given by Z[i, 2]. The fourth value Z[i, 3] represents the number of original observations in the newly formed cluster.</p>
+</blockquote>
+
+<p>So at the first iteration, words 0 (CHEESE) and 2 (GEESE) are combined to form a new cluster (#4) containing 2 original observations.</p>
+
+<p>At the second iteration, word 1 (CHORES) and cluster #4 are combined to form a new cluster (#5) containing 3 original observations.</p>
+
+<p>And at the third iteration, word 3 (GLOVES) and cluster #5 are combined to form a new cluster (#6) containing all 4 original observations.</p>
+
+<p>This corresponds to the following hierarchical clustering:</p>
+
+<pre class="lang-none prettyprint prettyprinted"><code><span class="pln">                  6       
+            ┌─────┴─────┐ 
+            5           │
+       ┌────┴────┐      │
+       4         │      │
+    ┌──┴──┐      │      │
+ CHEESE GEESE CHORES GLOVES</span></code></pre>
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+<div class="post-menu"><a href="https://codereview.stackexchange.com/a/37059" title="short permalink to this answer" class="short-link" id="link-post-37059">share</a><span class="lsep">|</span><a href="https://codereview.stackexchange.com/posts/37059/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="https://codereview.stackexchange.com/posts/37059/revisions" title="show all edits to this post">edited <span title="2013-12-12 17:40:56Z" class="relativetime">Dec 12 '13 at 17:40</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        
+        <div class="-flair">
+            
+        </div>
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2013-12-10 17:30:23Z" class="relativetime">Dec 10 '13 at 17:30</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="https://codereview.stackexchange.com/users/11728/gareth-rees"><div class="gravatar-wrapper-32"><img src="./python - String Matching and Clustering - Code Review Stack Exchange_files/093d6dc5c8295d32bcb8e76c7c66455a" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="https://codereview.stackexchange.com/users/11728/gareth-rees">Gareth Rees</a>
+        <div class="-flair">
+            <span class="reputation-score" title="reputation score 32,787" dir="ltr">32.8k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="70 silver badges"><span class="badge2"></span><span class="badgecount">70</span></span><span title="134 bronze badges"><span class="badge3"></span><span class="badgecount">134</span></span>
+        </div>
+    </div>
+</div>
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+        
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-37059" class="comments ">
+		    <table>
+                <tbody data-remaining-comments-count="0" data-canpost="false" data-cansee="true" data-comments-unavailable="false" data-addlink-disabled="true">
+
+
+
+    <tr id="comment-61242" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">hey, thanks so much, ive not got round to looking at this yet today, but i will tomo. I see you edited my jellyfish question. Should i split out the jaro distance question? It turns out the levenshtein one is buggy, its been confirmed by the developer, the jaro distance bug has not been confirmed (i may have got it wrong).</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/33260/woody-pride" title="166 reputation" class="comment-user owner">Woody Pride</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment61242_37059"><span title="2013-12-11 18:26:39Z" class="relativetime-clean">Dec 11 '13 at 18:26</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-163425" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Amazing! Very short and useful, they probably should include similar functionality in any data-processing software like Excel, etc</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/73144/kochede" title="101 reputation" class="comment-user">Kochede</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment163425_37059"><span title="2015-05-08 10:13:27Z" class="relativetime-clean">May 8 '15 at 10:13</span></a></span>
+                        <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+                    </td>
+    </tr>
+    <tr id="comment-311088" class="comment ">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Do anyone know how implement this in javascript?</span>
+                    –&nbsp;<a href="https://codereview.stackexchange.com/users/128204/isak-la-fleur" title="101 reputation" class="comment-user">Isak La Fleur</a>
+                <span class="comment-date" dir="ltr"><a class="comment-link" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#comment311088_37059"><span title="2017-05-18 07:36:13Z" class="relativetime-clean">May 18 at 7:36</span></a></span>
+                                                                            </div>
+                    </td>
+    </tr>
+                </tbody>
+		    </table>
+	    </div>
+
+        <div id="comments-link-37059" data-rep="50" data-anon="true">
+
+                <a class="js-add-link comments-link disabled-link " title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”.">add a comment</a><span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+            <a class="js-show-link comments-link dno" title="expand to show all comments on this post" href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" onclick=""></a>
+        </div>         
+    </td>
+</tr>    </tbody></table>
+</div>
+                                    <a name="new-answer"></a>
+                        <form id="post-form" action="https://codereview.stackexchange.com/questions/37026/answer/submit" method="post" class="post-form">
+                            <input type="hidden" id="post-id" value="37026">
+                            <input type="hidden" id="qualityBanWarningShown" name="qualityBanWarningShown" value="false">
+                            <input type="hidden" name="referrer" value="https://www.google.co.in/">
+                            <h2 class="space">Your Answer</h2>
+
+        <script>
+            StackExchange.ifUsing("editor", function () {
+                return StackExchange.using("mathjaxEditing", function () {
+                    StackExchange.MarkdownEditor.creationCallbacks.add(function (editor, postfix) {
+                        StackExchange.mathjaxEditing.prepareWmdForMathJax(editor, postfix, [["\\$", "\\$"]]);
+                    });
+                });
+            }, "mathjax-editing");
+        </script>
+
+            <script>
+            StackExchange.ifUsing("editor", function () {
+                StackExchange.using("externalEditor", function () {
+                    StackExchange.using("snippets", function () {
+                        StackExchange.snippets.init();
+                    });
+                });
+            }, "code-snippets");
+        </script>
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+       
+        StackExchange.using("externalEditor", function() {
+                // Have to fire editor after snippets, if snippets enabled
+                if (StackExchange.settings.snippets.snippetsEnabled) {
+                    StackExchange.using("snippets", function() {
+                        createEditor();
+                    });
+                }
+                else {
+                    createEditor();
+                }
+            });
+
+            function createEditor() {
+                StackExchange.prepareEditor({
+                    heartbeatType: 'answer',
+                convertImagesToLinks: false,
+                reputationToPostImages: null,
+                bindNavPrevention: true,
+                postfix: "",
+                    onDemand: true,
+                    discardSelector: ".discard-answer"
+                    ,immediatelyShowMarkdownHelp:true
+                    });
+                
+
+        }
+    });
+</script>
+
+
+<div id="post-editor" class="post-editor js-post-editor">
+
+    <div style="position: relative;"> 
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li id="wmd-bold-button" class="wmd-button" style="left: 0px;"><span style="background-position: 0px -20px;"></span></li><li id="wmd-italic-button" class="wmd-button" style="left: 25px;"><span style="background-position: -20px -20px;"></span></li><li id="wmd-spacer1" class="wmd-spacer" style="left: 50px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-link-button" class="wmd-button" style="left: 75px;"><span style="background-position: -40px -20px;"></span></li><li id="wmd-quote-button" class="wmd-button" style="left: 100px;"><span style="background-position: -60px -20px;"></span></li><li id="wmd-code-button" class="wmd-button" style="left: 125px;"><span style="background-position: -80px -20px;"></span></li><li id="wmd-image-button" class="wmd-button" style="left: 150px;"><span style="background-position: -100px -20px;"></span></li><li id="wmd-spacer2" class="wmd-spacer" style="left: 175px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-olist-button" class="wmd-button" style="left: 200px;"><span style="background-position: -120px -20px;"></span></li><li id="wmd-ulist-button" class="wmd-button" style="left: 225px;"><span style="background-position: -140px -20px;"></span></li><li id="wmd-heading-button" class="wmd-button" style="left: 250px;"><span style="background-position: -160px -20px;"></span></li><li id="wmd-hr-button" class="wmd-button" style="left: 275px;"><span style="background-position: -180px -20px;"></span></li><li id="wmd-spacer3" class="wmd-spacer" style="left: 300px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-undo-button" class="wmd-button" style="left: 325px;"><span style="background-position: -200px -20px;"></span></li><li id="wmd-redo-button" class="wmd-button" style="left: 350px;"><span style="background-position: -220px -20px;"></span></li></ul></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="9b5706e5964e98b21e6731004ec619b6">
+        <input id="author" name="author" type="text">
+    </div>
+
+
+
+</div>
+
+                            <div style="position: relative;">
+                                
+                                            <div class="form-item new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="https://codereview.stackexchange.com/users/login?ssrc=question_page&amp;returnurl=https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Email and Password</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid">
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false">
+                    <input type="hidden" name="use-google" class="use-google" value="false">
+                    <input type="button" class="submit-openid" value="Submit" style="display:none">
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tbody><tr>
+                    <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown">
+                </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', 'https%3a%2f%2fcodereview.stackexchange.com%2fquestions%2f37026%2fstring-matching-and-clustering%23new-answer', 'question_page');
+                    }
+                );
+            </script>
+            <noscript>
+                        &lt;h3&gt;Post as a guest&lt;/h3&gt;
+    &lt;div class="form-item"&gt;
+        &lt;table&gt;
+        &lt;tr&gt;
+                    &lt;td class="vm"&gt;
+                &lt;div&gt;
+                    &lt;label for="display-name"&gt;Name&lt;/label&gt;
+                    &lt;input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="m-address"&gt;Email&lt;/label&gt;
+                    &lt;input id="m-address" name="m-address" type="email" size="30" maxlength="100" value="" tabindex="106" placeholder="required, but never shown" /&gt;
+                &lt;/div&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/table&gt;
+    &lt;/div&gt;
+
+            </noscript>
+
+                            </div>
+           
+                                                            <div class="form-submit cbt">
+                                    <input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+                                    <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="btn-clear discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href="https://stackexchange.com/legal/privacy-policy" name="privacy" target="_blank">privacy policy</a> and <a href="https://stackexchange.com/legal/terms-of-service" name="tos" target="_blank">terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1">                                </div>
+                        </form>
+
+
+
+                        <h2 class="bottom-notice" data-loc="1">
+Not the answer you're looking for?                            Browse other questions tagged <a href="https://codereview.stackexchange.com/questions/tagged/python" class="post-tag" title="show questions tagged &#39;python&#39;" rel="tag">python</a> <a href="https://codereview.stackexchange.com/questions/tagged/strings" class="post-tag" title="show questions tagged &#39;strings&#39;" rel="tag">strings</a> <a href="https://codereview.stackexchange.com/questions/tagged/edit-distance" class="post-tag" title="show questions tagged &#39;edit-distance&#39;" rel="tag">edit-distance</a> <a href="https://codereview.stackexchange.com/questions/tagged/clustering" class="post-tag" title="show questions tagged &#39;clustering&#39;" rel="tag">clustering</a>  or <a href="https://codereview.stackexchange.com/questions/ask">ask your own question</a>.                        </h2>
+            </div>
+        </div>
+                <div id="sidebar" class="show-votes" role="complementary" aria-label="sidebar">
+                            <div class="module question-stats">
+                    <table id="qinfo">
+                        <tbody><tr>
+                            <td>
+                                <p class="label-key">asked</p>
+                            </td>
+                            <td style="padding-left: 10px">
+                                <p class="label-key" title="2013-12-10 10:59:07Z"><b>3 years, 7 months ago</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="label-key">viewed</p>
+                            </td>
+
+                            <td style="padding-left: 10px">
+                                <p class="label-key">
+                                    <b>12,574 times</b>
+                                </p>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td>
+                                    <p class="label-key">active</p>
+                                </td>
+                                <td style="padding-left: 10px">
+                                    <p class="label-key"><b><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering?lastactivity" class="lastactivity-link" title="2014-02-25 00:57:24Z">3 years, 5 months ago</a></b></p>
+                                </td>
+                            </tr>
+                    </tbody></table>
+                </div>
+                        
+            <script>
+                var ados = ados || {}; ados.run = ados.run || [];
+                ados.run.push(function () { ados_add_placement(22, 0, "adzerk1979622388", [5,17]).enableDynamicSiteSelection().setZone(56016); });
+            </script>
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1979622388"><a href="https://engine.adzerk.net/r?e=eyJhdiI6NDE5LCJhdCI6NSwiYnQiOjAsImNtIjo1ODUyMjcsImNoIjoxNjUzMSwiY2siOnt9LCJjciI6MzAyMjg1OCwiZGkiOiJmODNkODJlMTczN2Q0NDdmYTVmMmE5MDIwMjdmODhjZiIsImRtIjoxLCJmYyI6NTE2MTk3MywiZmwiOjUzMzE2MzcsImlwIjoiMTM5LjE2Ny4xNC4xNjQiLCJrdyI6InB5dGhvbixzdHJpbmdzLGVkaXQtZGlzdGFuY2UsY2x1c3RlcmluZyx4LWhvc3QtY29kZXJldmlldy5zdGFja2V4Y2hhbmdlLmNvbSIsIm53IjoyMiwicGMiOjAsImVjIjowLCJwciI6NTkzNzksInJ0IjoyLCJyZiI6Imh0dHBzOi8vd3d3Lmdvb2dsZS5jby5pbi8iLCJzYSI6IjMiLCJzYiI6ImktMDBlOTY3NTQ1NjM5MWRjYWIiLCJzcCI6NDgzOCwic3QiOjY3NDM0MSwidHIiOnRydWUsInVrIjoidWUxLWYyNmZkNjk2NTEyZTQwMTRhOWQ2ZTllYmM4OTE0NTlhIiwiem4iOjU2MDE2LCJ0cyI6MTUwMjAxMDE0NDg4OCwiYmYiOnRydWUsInBuIjoiYWR6ZXJrMTk3OTYyMjM4OCIsInVyIjoiaHR0cHM6Ly93d3cuZnJvZ2xvZ2ljLmNvbS9jb2NvL2ZyZWUtdHJpYWwvP3BrX2NhbXBhaWduPWNvZGVyZXZpZXctc2lkZWJhciZwa19rZXl3b3JkPWNvY28ifQ&amp;s=j4WFsOvxey97ZKXRV0RIsGFQeec" rel="nofollow" target="_blank" title=""><img src="./python - String Matching and Clustering - Code Review Stack Exchange_files/6358ccccb495409397386ee1b8e4e51d.png" title="" alt="" border="0" width="300" height="250"></a><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input type="radio" value="12" name="downvoteReason">Uninteresting</label></li><li><label><input type="radio" value="13" name="downvoteReason">Misleading</label></li><li><label><input type="radio" value="14" name="downvoteReason">Offensive</label></li><li><label><input type="radio" value="15" name="downvoteReason">Repetitive</label></li><li><label><input type="radio" value="16" name="downvoteReason">Other</label></li></ul><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div><img height="0px" width="0px" border="0" style="position:absolute;" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/i(1).gif"></div>
+        <div id="hireme"></div>
+        <script>
+window.clc_request = 'AmMM-9Gp3NQIAAAAAKKQAAATAAAAAgAAAABNAAAAfHB5dGhvbnxzdHJpbmdzfGVkaXQtZGlzdGFuY2V8Y2x1c3RlcmluZ3x4LWhvc3QtY29kZXJldmlldy5zdGFja2V4Y2hhbmdlLmNvbXwAuhVgSfA9xd12og';;!function i(n){try{if("function"!=typeof[].indexOf)return;if(!window.addEventListener)return;if(!n.allowed)return;if(!RegExp(n.allowed).test(location.hostname))return;var t=window,e=t.document,c=n.wv;if(e.hidden&&c)return void e.addEventListener("visibilitychange",function t(){e.hidden||(i(n),e.removeEventListener("visibilitychange",t))});if(t.clc=t.clc||{},t.clc.init=t.clc.init||[],n.autoload&&t.clc.init.push(function(i){return i.load()}),t.clc.options){for(var o in t.clc.options)n[o]=t.clc.options[o];t.clc.options=n}else t.clc.options=n;var r=e.createElement("script");r.async=!0,r.src=n.lib,e.body.appendChild(r)}catch(i){}}.call(null, {"lib":"https://cdn.sstatic.net/clc/clc.min.js?v=f578dd45e065","u":"https://clc.stackoverflow.com/markup.js","azw":true,"kt":2000,"tto":true,"h":"clc.stackoverflow.com","autoload":true,"allowed":"^(((talent\\.)?stackoverflow)|(blog\\.codinghorror)|(serverfault|askubuntu)|([^\\.]+\\.stackexchange))\\.com$","wv":true});        </script>
+            
+
+            
+
+                <div class="module sidebar-related">
+                    <h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/52029?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">7</div></a><a href="https://codereview.stackexchange.com/questions/52029/k-means-clustering-in-python?rq=1" class="question-hyperlink">K-means clustering in Python</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/61872?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">3</div></a><a href="https://codereview.stackexchange.com/questions/61872/basic-t-sql-to-compare-two-same-length-strings?rq=1" class="question-hyperlink">Basic T-SQL to compare two same length strings</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/107072?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">1</div></a><a href="https://codereview.stackexchange.com/questions/107072/approximately-matching-strings-to-elements-in-an-array?rq=1" class="question-hyperlink">Approximately matching strings to elements in an array</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/118278?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">4</div></a><a href="https://codereview.stackexchange.com/questions/118278/pandas-spatial-clustering?rq=1" class="question-hyperlink">PANDAS spatial clustering</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/119752?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">3</div></a><a href="https://codereview.stackexchange.com/questions/119752/comparison-function-for-strings?rq=1" class="question-hyperlink">Comparison function for strings</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/120207?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">3</div></a><a href="https://codereview.stackexchange.com/questions/120207/string-similarity-calculation?rq=1" class="question-hyperlink">String similarity calculation</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/123661?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">5</div></a><a href="https://codereview.stackexchange.com/questions/123661/comparing-two-approximate-string-matching-algorithms-in-java?rq=1" class="question-hyperlink">Comparing two approximate string matching algorithms in Java</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/133260?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">5</div></a><a href="https://codereview.stackexchange.com/questions/133260/clustering-nodes-with-hamming-distance-3?rq=1" class="question-hyperlink">Clustering nodes with Hamming distance &lt; 3</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/141603?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes answered-accepted default">4</div></a><a href="https://codereview.stackexchange.com/questions/141603/check-if-two-strings-are-one-edit-apart-using-python?rq=1" class="question-hyperlink">Check if two strings are one 'edit' apart using Python</a></div><div class="spacer js-gps-track"><a href="https://codereview.stackexchange.com/q/151882?rq=1" title="Vote score (upvotes - downvotes)"><div class="answer-votes default">5</div></a><a href="https://codereview.stackexchange.com/questions/151882/k-means-clustering-in-python2?rq=1" class="question-hyperlink">K-Means clustering in Python2</a></div>
+                    </div>
+                </div>
+            
+
+<div id="hot-network-questions" class="module tex2jax_ignore">
+    <h4>
+        <a href="https://stackexchange.com/questions?tab=hot" class="js-gps-track" data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li>
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="https://math.stackexchange.com/questions/2383751/how-is-a-doubly-twisted-cylinder-different-from-a-cylinder" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How is a doubly twisted cylinder different from a cylinder?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-gaming" title="Arqade"></div><a href="https://gaming.stackexchange.com/questions/315335/is-it-possible-to-hit-a-mine-on-first-click" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:41 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is it possible to hit a mine on first click?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="https://mathoverflow.net/questions/278053/fixed-point-of-a-group-action" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Fixed point of a group action
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/166725/how-to-generate-easy-to-type-passwords-without-sacrificing-security" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to generate easy to type passwords without sacrificing security?
+                </a>
+
+            </li>
+            <li>
+                <div class="favicon favicon-worldbuilding" title="Worldbuilding Stack Exchange"></div><a href="https://worldbuilding.stackexchange.com/questions/87967/how-plausible-is-a-tilted-axis-planet" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:579 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How plausible is a 'tilted axis' planet?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-sharepoint" title="SharePoint Stack Exchange"></div><a href="https://sharepoint.stackexchange.com/questions/222662/how-iis-websites-make-references-of-webapplications-and-all-sitecollections-insi" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:232 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How IIS websites make references of webapplications and all sitecollections inside webapplication?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-scifi" title="Science Fiction &amp; Fantasy Stack Exchange"></div><a href="https://scifi.stackexchange.com/questions/166366/was-ned-stark-actually-a-good-swordsman" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:186 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Was Ned Stark actually a good swordsman?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-money" title="Personal Finance &amp; Money Stack Exchange"></div><a href="https://money.stackexchange.com/questions/83574/is-amazons-offer-of-a-50-gift-card-a-scam" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:93 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is Amazon's offer of a $50 gift card a scam?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-apple" title="Ask Different"></div><a href="https://apple.stackexchange.com/questions/294095/does-just-rm-rf-delete-any-files" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:118 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Does just 'rm -rf' delete any files?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="https://security.stackexchange.com/questions/166684/should-i-revoke-no-longer-used-lets-encrypt-certificates-before-destroying-them" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should I revoke no longer used Let's Encrypt certificates before destroying them?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-movies" title="Movies &amp; TV Stack Exchange"></div><a href="https://movies.stackexchange.com/questions/78240/how-do-film-makers-record-the-president-of-the-united-states" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:367 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do film makers record the President of the United States?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-askubuntu" title="Ask Ubuntu"></div><a href="https://askubuntu.com/questions/943289/how-to-exclude-a-package-from-apt-get-autoremove" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:89 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to exclude a package from apt-get autoremove?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="https://stackoverflow.com/questions/45505477/append-int-to-stdstring" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Append int to std::string
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-german" title="German Language Stack Exchange"></div><a href="https://german.stackexchange.com/questions/38166/how-to-say-btw-in-german" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:253 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to say “BTW” in German?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-travel" title="Travel Stack Exchange"></div><a href="https://travel.stackexchange.com/questions/99547/what-happens-if-an-airport-is-evacuated-but-a-transit-passenger-doesnt-hold-a-t" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:273 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What happens if an airport is evacuated but a transit passenger doesn't hold a travel document valid for entering the country?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/153176/generate-a-block-matrix" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    generate a block matrix
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="https://codegolf.stackexchange.com/questions/137743/hello-world-robbers-thread" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    "Hello, World!" (Robbers' thread)
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-retrocomputing" title="Retrocomputing Stack Exchange"></div><a href="https://retrocomputing.stackexchange.com/questions/4440/when-was-internet-access-first-available-to-public-in-usa" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:648 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    When was internet access first available to public in USA?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-mathematica" title="Mathematica Stack Exchange"></div><a href="https://mathematica.stackexchange.com/questions/153159/how-do-i-globally-set-control-widths" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:387 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I globally set control widths?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/42675/what-is-this-plane-and-what-are-the-rockets-on-the-back-used-for" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What is this plane and what are the rockets on the back used for?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-sqa" title="Software Quality Assurance &amp; Testing Stack Exchange"></div><a href="https://sqa.stackexchange.com/questions/28926/actual-data-for-why-developers-shouldnt-test-their-own-code" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:244 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Actual data for why developers shouldn't test their own code?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="https://aviation.stackexchange.com/questions/42613/why-are-fuel-tanks-in-the-wings-filled-first-and-why-are-they-used-last" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why are fuel tanks in the wings filled first, and why are they used last?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-judaism" title="Mi Yodeya"></div><a href="https://judaism.stackexchange.com/questions/84575/did-moshe-say-that-he-had-punished-miriam" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:248 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Did Moshe say that he had punished Miriam?
+                </a>
+
+            </li>
+            <li class="dno js-hidden" style="display: list-item;">
+                <div class="favicon favicon-bitcoin" title="Bitcoin Stack Exchange"></div><a href="https://bitcoin.stackexchange.com/questions/57659/why-is-it-harder-to-compute-nonce-for-a-hash-with-a-certain-number-zero-prefixes" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:308 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is it harder to compute nonce for a hash with a certain number zero prefixes than it is for any other hash?
+                </a>
+
+            </li>
+    </ul>
+
+        
+</div>
+        </div>
+    
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="https://codereview.stackexchange.com/feeds/question/37026" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>    </div>
+<script>
+StackExchange.ready(function(){$.get('/posts/37026/ivc/cab2');});
+</script>
+<noscript>
+    &lt;div&gt;&lt;img src="/posts/37026/ivc/cab2" class="dno" alt="" width="0" height="0"&gt;&lt;/div&gt;
+</noscript><div style="display:none" id="prettify-lang">lang-py</div></div>
+
+
+        </div>
+    </div>
+
+    <footer id="footer" class="s-footer js-footer" role="contentinfo">
+        <div class="-container">
+            <div class="g-row js-sp-between">
+                
+                    <nav class="-nav js-category _visible" data-name="default">
+                        <h5 class="-title"><a href="https://codereview.stackexchange.com/">Code Review</a></h5>
+                        <ul class="-list">
+                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 2 })" href="https://codereview.stackexchange.com/tour">Tour</a></li>
+                                                            <li class="-item"><a href="https://codereview.stackexchange.com/help" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 3 })">Help</a></li>
+                                                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 5 })" href="https://chat.stackexchange.com/?tab=site&amp;host=codereview.stackexchange.com">Chat</a></li>
+                            <li class="-item g-col"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 13 })" href="https://codereview.stackexchange.com/contact">Contact</a></li>
+                                <li class="-item g-col"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 14 })" href="https://codereview.meta.stackexchange.com/">Feedback</a></li>
+                                                            <li class="-item"><a onclick="StackExchange.switchMobile(&quot;on&quot;)" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 12 })">Mobile</a></li>
+                        </ul>
+                    </nav>
+                <nav class="-nav js-category _visible" data-name="default">
+                    <h5 class="-title"><a class="js-gps-track" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">Company</a></h5>
+                    <ul class="-list">
+                                                    <li class="-item"><a href="https://stackoverflow.com/" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 15})">Stack Overflow</a></li>
+                            <li class="-item"><a href="https://www.stackoverflowbusiness.com/?utm_source=so-footer&amp;utm_medium=referral&amp;utm_campaign=brand-activation" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 19 })">Stack Overflow Business</a></li>
+                            <li class="-item"><a href="https://stackoverflow.com/jobs" class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 17})">Developer Jobs</a></li>
+                                <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 1 })" href="https://stackoverflow.com/company/about">About</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 27 })" href="https://stackoverflow.com/company/press">Press</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 7 })" href="https://stackexchange.com/legal">Legal</a></li>
+                        <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link: 8 })" href="https://stackexchange.com/legal/privacy-policy">Privacy Policy</a></li>
+                    </ul>
+                </nav>
+                <div class="-network g-row">
+                    <a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-back-trigger js-back"><svg role="icon" class="svg-icon iconArrowLeftAlt" width="18" height="18" viewBox="0 0 18 18"><path d="M10.58 16L12 14.59 6.4 9 12 3.41 10.57 2l-7 7z"></path></svg></a>
+                    <div>
+                        <h5 class="-title"><a href="https://stackexchange.com/">Stack Exchange<br> Network</a></h5>
+                        <ul class="-list">
+                            <li class="-item"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Technology">Technology</a></li>
+                            <li class="-item"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Life / Arts">Life / Arts</a></li>
+                            <li class="-item"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Culture / Recreation">Culture / Recreation</a></li>
+                            <li class="-item"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Science">Science</a></li>
+                            <li class="-item"><a href="https://codereview.stackexchange.com/questions/37026/string-matching-and-clustering#" class="-link _expandable js-category-trigger js-gps-track" data-gps-track="footer.click({ location: 2, link: 24 })" data-target="Other">Other</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <nav class="-nav js-category" data-name="Technology">
+        <ul class="-list">
+                <li class="-item"><a href="https://stackoverflow.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                <li class="-item"><a href="https://serverfault.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="system and network administrators">Server Fault</a></li>
+                <li class="-item"><a href="https://superuser.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="computer enthusiasts and power users">Super User</a></li>
+                <li class="-item"><a href="https://webapps.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of web applications">Web Applications</a></li>
+                <li class="-item"><a href="https://askubuntu.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                <li class="-item"><a href="https://webmasters.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="pro webmasters">Webmasters</a></li>
+                <li class="-item"><a href="https://gamedev.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and independent game developers">Game Development</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://tex.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                <li class="-item"><a href="https://softwareengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professionals, academics, and students working within the systems development life cycle">Software Engineering</a></li>
+                <li class="-item"><a href="https://unix.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Linux, FreeBSD and other Un*x-like operating systems">Unix &amp; Linux</a></li>
+                <li class="-item"><a href="https://apple.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                <li class="-item"><a href="https://wordpress.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="WordPress developers and administrators">WordPress Development</a></li>
+                <li class="-item"><a href="https://gis.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                <li class="-item"><a href="https://electronics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://android.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                <li class="-item"><a href="https://security.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="information security professionals">Information Security</a></li>
+                <li class="-item"><a href="https://dba.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                <li class="-item"><a href="https://drupal.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Drupal developers and administrators">Drupal Answers</a></li>
+                <li class="-item"><a href="https://sharepoint.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="SharePoint enthusiasts">SharePoint</a></li>
+                <li class="-item"><a href="https://ux.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="user experience researchers and experts">User Experience</a></li>
+                <li class="-item"><a href="https://mathematica.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Wolfram Mathematica">Mathematica</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://salesforce.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Salesforce administrators, implementation experts, developers and anybody in-between">Salesforce</a></li>
+                <li class="-item"><a href="https://expressionengine.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="administrators, end users, developers and designers for ExpressionEngine® CMS">ExpressionEngine® Answers</a></li>
+                <li class="-item"><a href="https://blender.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who use Blender to create 3D graphics, animations, or games">Blender</a></li>
+                <li class="-item"><a href="https://networkengineering.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="network engineers">Network Engineering</a></li>
+                <li class="-item"><a href="https://crypto.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="software developers, mathematicians and others interested in cryptography">Cryptography</a></li>
+                <li class="-item"><a href="https://codereview.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="peer programmer code reviews">Code Review</a></li>
+                <li class="-item"><a href="https://magento.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of the Magento e-Commerce platform">Magento</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://softwarerecs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people seeking specific software recommendations">Software Recommendations</a></li>
+                <li class="-item"><a href="https://dsp.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="practitioners of the art and science of signal, image and video processing">Signal Processing</a></li>
+                <li class="-item"><a href="https://emacs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those using, extending or developing Emacs">Emacs</a></li>
+                <li class="-item"><a href="https://raspberrypi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users and developers of hardware and software for Raspberry Pi">Raspberry Pi</a></li>
+                <li class="-item"><a href="https://codegolf.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programming puzzle enthusiasts and code golfers">Programming Puzzles &amp; Code Golf</a></li>
+                <li class="-item"><a href="https://ethereum.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="users of Ethereum, the decentralized application platform and smart contract enabled blockchain">Ethereum</a></li>
+                <li class="-item"><a href="https://datascience.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Data science professionals, Machine Learning specialists, and those interested in learning more about the field">Data Science</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Technology"><ul class="-list">
+                <li class="-item"><a href="https://arduino.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="developers of open-source hardware and software that is compatible with Arduino">Arduino</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#technology" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (26)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Life / Arts">
+        <ul class="-list">
+                <li class="-item"><a href="https://photo.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                <li class="-item"><a href="https://scifi.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                <li class="-item"><a href="https://graphicdesign.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="Graphic Design professionals, students, and enthusiasts">Graphic Design</a></li>
+                <li class="-item"><a href="https://movies.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="movie and tv enthusiasts">Movies &amp; TV</a></li>
+                <li class="-item"><a href="https://music.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="musicians, students, and enthusiasts">Music: Practice &amp; Theory</a></li>
+                <li class="-item"><a href="https://worldbuilding.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="writers/artists using science, geography and culture to construct imaginary worlds and settings">Worldbuilding</a></li>
+                <li class="-item"><a href="https://cooking.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Life / Arts"><ul class="-list">
+                <li class="-item"><a href="https://diy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="contractors and serious DIYers">Home Improvement</a></li>
+                <li class="-item"><a href="https://money.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                <li class="-item"><a href="https://academia.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="academics and those enrolled in higher education">Academia</a></li>
+                <li class="-item"><a href="https://law.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="legal professionals, students, and others with experience or interest in law">Law</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#lifearts" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (17)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Culture / Recreation">
+        <ul class="-list">
+                <li class="-item"><a href="https://english.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                <li class="-item"><a href="https://skeptics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientific skepticism">Skeptics</a></li>
+                <li class="-item"><a href="https://judaism.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                <li class="-item"><a href="https://travel.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="road warriors and seasoned travelers">Travel</a></li>
+                <li class="-item"><a href="https://christianity.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                <li class="-item"><a href="https://ell.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="speakers of other languages learning English">English Language Learners</a></li>
+                <li class="-item"><a href="https://japanese.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, teachers, and linguists wanting to discuss the finer points of the Japanese language">Japanese Language</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Culture / Recreation"><ul class="-list">
+                <li class="-item"><a href="https://gaming.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                <li class="-item"><a href="https://bicycles.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                <li class="-item"><a href="https://rpg.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                <li class="-item"><a href="https://anime.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="anime and manga fans">Anime &amp; Manga</a></li>
+                <li class="-item"><a href="https://puzzling.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those who create, solve, and study puzzles">Puzzling</a></li>
+                <li class="-item"><a href="https://mechanics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="mechanics and DIY enthusiast owners of cars, trucks, and motorcycles">Motor Vehicle Maintenance &amp; Repair</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#culturerecreation" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (32)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Science">
+        <ul class="-list">
+                <li class="-item"><a href="https://mathoverflow.net/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="professional mathematicians">MathOverflow</a></li>
+                <li class="-item"><a href="https://math.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                <li class="-item"><a href="https://stats.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                <li class="-item"><a href="https://cstheory.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                <li class="-item"><a href="https://physics.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="active researchers, academics and students of physics">Physics</a></li>
+                <li class="-item"><a href="https://chemistry.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="scientists, academics, teachers and students">Chemistry</a></li>
+                <li class="-item"><a href="https://biology.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="biology researchers, academics, and students">Biology</a></li>
+                    </ul></nav><nav class="-nav js-category" data-name="Science"><ul class="-list">
+                <li class="-item"><a href="https://cs.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="students, researchers and practitioners of computer science">Computer Science</a></li>
+                <li class="-item"><a href="https://philosophy.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="those interested in the study of the fundamental nature of knowledge, reality, and existence">Philosophy</a></li>
+                            <li class="-item">
+                    <a href="https://stackexchange.com/sites#science" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 26 })">
+                        <strong>
+                            more (10)
+                        </strong>
+                    </a>
+                </li>
+        </ul>
+    </nav>
+    <nav class="-nav js-category" data-name="Other">
+        <ul class="-list">
+                <li class="-item"><a href="https://meta.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                <li class="-item"><a href="https://stackapps.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                <li class="-item"><a href="https://api.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="programmatic interaction with Stack Exchange sites">API</a></li>
+                <li class="-item"><a href="https://data.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="querying Stack Exchange data using SQL">Data</a></li>
+                <li class="-item"><a href="https://area51.stackexchange.com/" class="-link js-gps-track" data-gps-track="footer.click({ location: 2, link: 25 })" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                    </ul>
+    </nav>
+                <div class="-copyright text-right">
+                    <div class="g-column jc-sp-between">
+                        <ul class="-list">
+                            <li class="-item"><a class="js-gps-track -link" data-gps-track="footer.click({ location: 2, link:4 })" href="https://stackoverflow.blog/?blb=1">Blog</a></li>
+                            <li class="-item"><a href="https://www.facebook.com/officialstackoverflow/" class="-link">Facebook</a></li>
+                            <li class="-item"><a href="https://twitter.com/stackoverflow" class="-link">Twitter</a></li>
+                            <li class="-item"><a href="https://linkedin.com/company/stack-overflow" class="-link">LinkedIn</a></li>
+                        </ul>
+
+                        <div>
+                            <p>
+                                site design / logo © 2017 Stack Exchange Inc; user contributions licensed under <a href="https://creativecommons.org/licenses/by-sa/3.0/" rel="license" class="-link">cc by-sa 3.0</a>
+                                with <a href="https://stackoverflow.blog/2009/06/25/attribution-required/" rel="license" class="-link">attribution required</a>.
+                                <span id="svnrev">rev 2017.8.4.26704</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+    </footer>
+
+    <noscript>
+        &lt;div id="noscript-warning"&gt;Code Review Stack Exchange works best with JavaScript enabled
+            &lt;img src="https://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"&gt;
+        &lt;/div&gt;
+    </noscript>
+<script>var z=document.createElement("script");z.type="text/javascript",z.async=!0,z.src="https://static.adzerk.net/ados.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(z,s);</script>
+<script>
+var ados = ados || {};
+ados.run = ados.run || [];
+
+
+ados.run.push(function () {
+    setTimeout(function () { $("#adzerk-user-match").remove(); }, window.AUMIframeDone ? 0 : 2000);
+    ados_setKeywords('python,strings,edit-distance,clustering,x-host-codereview.stackexchange.com');; ados_load();
+});   
+
+</script>
+
+    <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function() { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-5620270-24', {'cookieDomain': 'stackexchange.com'});
+                ga('set', 'dimension2', '|python|strings|edit-distance|clustering|');
+                ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+                qc.async = true;
+                qc.src = (ssl ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
+                s.parentNode.insertBefore(qc, s);
+                _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+                            var sc=document.createElement('script');
+                sc.async=true;
+                sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+                s.parentNode.insertBefore(sc, s);
+                _comscore.push({ c1: "2", c2: "17440561" });
+        })();
+
+    </script>
+        
+    
+            <script type="text/javascript">
+                
+                (function(appendChild) {
+                    Node.prototype.appendChild = function() {
+                        var parent = this;
+                        var newNode = arguments[0];
+                        if (parent.nodeName === 'HEAD'
+                            && newNode
+                            && newNode.nodeName === 'SCRIPT'
+                            && newNode.src) {
+                            
+                            window.setTimeout(function() {
+                                var result = newNode.src.match(/^https:\/\/maps\.googleapis\.com\/maps\/api\/place\/js\/(\w+)Service\./i) || [];
+                                var service = result[1];
+                                if (service) {
+                                    if (service === 'Autocompletion') service =  2;
+                                    else if (service === 'Place') service = 1;
+                                    else service = 0;
+                                    StackExchange.using('gps', function() {
+                                        StackExchange.gps.track('google_maps_places_api.call', { service: service });
+                                    });
+                                }
+                            }, 0);
+                        }
+                        return appendChild.apply(this, arguments);
+                    };
+                })(Node.prototype.appendChild);
+            </script>
+    
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: MathJax_Size1, monospace;"></div></div><script async="" src="./python - String Matching and Clustering - Code Review Stack Exchange_files/clc.min.js"></script></body></html>
